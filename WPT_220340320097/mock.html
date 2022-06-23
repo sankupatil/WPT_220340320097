@@ -1,0 +1,65 @@
+<html>
+<body>
+
+<form action="poc2" method="get">
+<Br/>Book id<input type="text" id="bookid" name="bookid"/>
+<span id="status">Status</span>
+<br>
+<br>
+Book name<input type="text" id="bookname" name="bookname"/>
+<br>
+<br>
+Price<input type="number" id="price" name="price"/>
+<br>
+<br>
+<button id="b2"> Add a book</button>
+<br>
+<br>
+<p id="info">Book info</p>
+
+</form>
+
+
+</body>
+
+<script src="jquery-3.5.1.min.js"></script>
+<script>//our scrip will come here 
+
+
+
+$(document).ready(function()
+{
+console.log("no more sins");
+$("#b2").click(function () 
+	{ 
+		console.log("jquery works");
+		let input={bookid:$("#bookid").val(),bookname:$("#bookname").val(),price:$("#price").val()}
+
+		let ajaxparams={
+			data:input,
+			type:"get",
+			url:"http://localhost:8081/bookdata",
+			datatype:"json",
+			success:(datafromserver)=>{
+				if(datafromserver==true){
+					$("#status").html("Added successfully");
+					console.log("Book added successfully!");
+				}
+				else{
+					$("#status").html("Addition failed")
+				}
+			}
+			error:(error)=>{
+				console.log("error");
+			}
+		};
+		$.ajax(ajaxparams);
+	});
+	
+});
+
+
+</script>
+
+
+</html>
